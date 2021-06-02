@@ -1086,16 +1086,6 @@ namespace Xpetra {
     ///
     /// \warning Be aware that the view on the multivector data is non-persisting, i.e.
     ///          only valid as long as the multivector does not run of scope!
-    template<class TargetDeviceType>
-    typename Kokkos::Impl::if_c<
-      std::is_same<
-        typename dual_view_type::t_dev_um::execution_space::memory_space,
-        typename TargetDeviceType::memory_space>::value,
-        typename dual_view_type::t_dev_um,
-        typename dual_view_type::t_host_um>::type
-    getLocalView () const {
-      return this->MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node >::template getLocalView<TargetDeviceType>();
-    }
 
     typename dual_view_type::t_host_um getHostLocalView () const {
       typedef Kokkos::View< typename dual_view_type::t_host::data_type ,

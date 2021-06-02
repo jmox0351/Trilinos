@@ -204,7 +204,7 @@ getTpetra_Vector() const
 
 
 #ifdef HAVE_XPETRA_KOKKOS_REFACTOR
-
+#ifdef TPETRA_ENABLE_DEPRECATED_CODE
 template<class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
 typename Xpetra::MultiVector<Scalar, LocalOrdinal, GlobalOrdinal, Node>::dual_view_type::t_host_um
 TpetraVector<Scalar, LocalOrdinal, GlobalOrdinal, Node>::
@@ -221,7 +221,7 @@ getDeviceLocalView() const
 {
     return this->TpetraMultiVector<Scalar, LocalOrdinal, GlobalOrdinal, Node>::getDeviceLocalView();
 }
-
+#endif
 
 #if 0
  template<class TargetDeviceType>
