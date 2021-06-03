@@ -312,6 +312,7 @@ class MultiVector
 
     typedef typename Kokkos::Details::ArithTraits<Scalar>::val_type                                                                  impl_scalar_type;
     typedef Kokkos::DualView<impl_scalar_type**, Kokkos::LayoutStride, typename node_type::execution_space, Kokkos::MemoryUnmanaged> dual_view_type;
+    typedef Kokkos::DualView<const impl_scalar_type**, Kokkos::LayoutStride, typename node_type::execution_space, Kokkos::MemoryUnmanaged> dual_view_type_const;
     typedef typename dual_view_type::host_mirror_space      host_execution_space;
     typedef typename dual_view_type::t_dev::execution_space dev_execution_space;
 #ifdef TPETRA_ENABLE_DEPRECATED_CODE
@@ -377,14 +378,14 @@ class MultiVector
     }
 
 
-    virtual typename dual_view_type::t_host_um getHostLocalView (Access::ReadOnlyStruct)  const
+    virtual typename dual_view_type::t_host_const_um getHostLocalView (Access::ReadOnlyStruct)  const
     {
       typename dual_view_type::t_host_um test;
       return test;
     }
 
 
-    virtual typename dual_view_type::t_dev_um  getDeviceLocalView(Access::ReadOnlyStruct) const
+    virtual typename dual_view_type::t_dev_const_um  getDeviceLocalView(Access::ReadOnlyStruct) const
     {
         typename dual_view_type::t_dev_um test;
         return test;

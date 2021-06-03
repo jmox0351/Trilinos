@@ -282,14 +282,15 @@ namespace Xpetra {
 #ifdef HAVE_XPETRA_KOKKOS_REFACTOR
     typedef typename Xpetra::MultiVector<Scalar, LocalOrdinal, GlobalOrdinal, Node>::dual_view_type dual_view_type;
 
+
 #ifdef TPETRA_ENABLE_DEPRECATED_CODE
     typename dual_view_type::t_host_um getHostLocalView () const;
 
     typename dual_view_type::t_dev_um getDeviceLocalView() const;
 #endif
-    typename dual_view_type::t_host_um getHostLocalView (Access::ReadOnlyStruct) const;
+    typename dual_view_type::t_host_const_um getHostLocalView (Access::ReadOnlyStruct) const;
 
-    typename dual_view_type::t_dev_um getDeviceLocalView(Access::ReadOnlyStruct) const;
+    typename dual_view_type::t_dev_const_um getDeviceLocalView(Access::ReadOnlyStruct) const;
 
     typename dual_view_type::t_host_um getHostLocalView (Access::OverwriteAllStruct) const;
 

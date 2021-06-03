@@ -386,26 +386,50 @@ namespace Xpetra {
                    Kokkos::ALL(), Kokkos::ALL());
   }
 #endif
-#if 0
+
+  template<class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
+  typename TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::dual_view_type::t_host_const_um
+  TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::
+  getHostLocalView (Access::ReadOnlyStruct) const {
+    return vec_->getLocalViewHost(Tpetra::Access::ReadOnly);
+
+  }
+
+  template<class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
+  typename TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::dual_view_type::t_dev_const_um
+  TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::
+  getDeviceLocalView(Access::ReadOnlyStruct) const {
+    return vec_->getLocalViewDevice(Tpetra::Access::ReadOnly);
+  }
+
   template<class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
   typename TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::dual_view_type::t_host_um
   TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::
-  getHostLocalView (Access::ReadOnlyStruct) const {
-	  auto temp = vec_->getLocalViewHost(Tpetra::Access::ReadOnly);
-    return temp;
-//
-//    		subview(,
-//                   Kokkos::ALL(), Kokkos::ALL());
+  getHostLocalView (Access::OverwriteAllStruct) const {
+    return vec_->getLocalViewHost(Tpetra::Access::OverwriteAll);
+
   }
-#endif
+
   template<class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
   typename TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::dual_view_type::t_dev_um
   TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::
-  getDeviceLocalView(Access::ReadOnlyStruct) const {
-	  typename TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::dual_view_type::t_dev_um temp = vec_->getLocalViewDevice(Tpetra::Access::ReadOnly);
-	  return temp;
-    //return subview(vec_->template getLocalViewDevice<typename TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::dual_view_type::t_dev_um::execution_space> (Tpetra::Access::ReadOnly),
-      //             Kokkos::ALL(), Kokkos::ALL());
+  getDeviceLocalView(Access::OverwriteAllStruct) const {
+    return vec_->getLocalViewDevice(Tpetra::Access::OverwriteAll);
+  }
+
+  template<class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
+  typename TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::dual_view_type::t_host_um
+  TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::
+  getHostLocalView (Access::ReadWriteStruct) const {
+    return vec_->getLocalViewHost(Tpetra::Access::ReadWrite);
+
+  }
+
+  template<class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
+  typename TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::dual_view_type::t_dev_um
+  TpetraMultiVector<Scalar,LocalOrdinal,GlobalOrdinal,Node>::
+  getDeviceLocalView(Access::ReadWriteStruct) const {
+    return vec_->getLocalViewDevice(Tpetra::Access::ReadWrite);
   }
 
 #endif
