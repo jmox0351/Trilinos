@@ -40,8 +40,7 @@ IntegratorForwardSensitivity(
   if (use_combined_method_)
     integrator_ = createIntegratorBasic<Scalar>(tempus_pl_, sens_model_);
   else {
-    auto combined_fsa_model = Teuchos::rcp_const_cast<Thyra::ModelEvaluator<Scalar>>(sens_stepper_->getModel());
-    integrator_ = createIntegratorBasic<Scalar>(tempus_pl_, combined_fsa_model);
+    integrator_ = createIntegratorBasic<Scalar>(tempus_pl_, sens_stepper_->getModel());
     integrator_->setStepper(sens_stepper_);
     integrator_->initialize();
   }
@@ -57,11 +56,13 @@ IntegratorForwardSensitivity(
 
   integrator_ = createIntegratorBasic<Scalar>();
   this->setParameterList(Teuchos::null);
+  auto integratorName = tempus_pl_->get<std::string>("Integrator Name");
+  integrator_->setIntegratorName(integratorName);
   createSensitivityModelAndStepper(model);
   if (use_combined_method_)
-    integrator_ = integratorBasic<Scalar>(sens_model_, stepperType);
+    integrator_ = createIntegratorBasic<Scalar>(sens_model_, stepperType);
   else {
-    integrator_ = createIntegratorBasic<Scalar>();
+    integrator_ = createIntegratorBasic<Scalar>(tempus_pl_, sens_stepper_->getModel());
     integrator_->setParameterList(tempus_pl_);
     integrator_->setStepper(sens_stepper_);
     integrator_->initialize();

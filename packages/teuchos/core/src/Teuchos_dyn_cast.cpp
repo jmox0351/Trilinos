@@ -52,9 +52,6 @@ void Teuchos::dyn_cast_throw_exception(
   const std::string &T_to
   )
 {
-  asm("int $3");
-  std::cout << "SIDAFA: got here!!" << std::endl;
-
   TEUCHOS_TEST_FOR_EXCEPTION(
     true, m_bad_cast
     ,"dyn_cast<" << T_to << ">(" << T_from

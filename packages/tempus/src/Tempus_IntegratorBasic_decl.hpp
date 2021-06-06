@@ -221,13 +221,13 @@ Teuchos::RCP<IntegratorBasic<Scalar> > createIntegratorBasic(
 template<class Scalar>
 Teuchos::RCP<IntegratorBasic<Scalar> > createIntegratorBasic(
   Teuchos::RCP<Teuchos::ParameterList>                pList,
-  const Teuchos::RCP<Thyra::ModelEvaluator<Scalar> >& model);
+  const Teuchos::RCP<const Thyra::ModelEvaluator<Scalar> >& model);
 
 
 /// Nonmember constructor
 template<class Scalar>
 Teuchos::RCP<IntegratorBasic<Scalar> > createIntegratorBasic(
-  const Teuchos::RCP<Thyra::ModelEvaluator<Scalar> >& model,
+  const Teuchos::RCP<const Thyra::ModelEvaluator<Scalar> >& model,
   std::string stepperType);
 
 
